@@ -52,11 +52,15 @@ class _SettingState extends State<Setting> with SingleTickerProviderStateMixin {
                 }),
             Container(
                 height: 350,
+                width: double.infinity.w,
                 decoration: const BoxDecoration(color: Colors.transparent),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                         child: TabBarView(
+                      viewportFraction: 0.98.w,
                       controller: _tabController,
                       children: const [
                         GeneralSettings(),

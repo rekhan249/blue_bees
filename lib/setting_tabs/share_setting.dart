@@ -29,10 +29,11 @@ class _SharedSettingState extends State<SharedSetting> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Container(
                 decoration: BoxDecoration(border: Border.all()),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                       height: 50,
@@ -62,12 +63,15 @@ class _SharedSettingState extends State<SharedSetting> {
                 ),
               ),
             ),
-            Text(
-              'Participant',
-              style: TextStyle(color: Colors.black, fontSize: 18.sp),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Participant',
+                style: TextStyle(color: Colors.black, fontSize: 18.sp),
+              ),
             ),
             Container(
-              margin: const EdgeInsets.all(05),
+              margin: const EdgeInsets.all(04),
               child: Container(
                   margin: const EdgeInsets.all(05),
                   child: SfDataGrid(
@@ -83,7 +87,7 @@ class _SharedSettingState extends State<SharedSetting> {
                       GridColumn(
                           columnName: 'invitation',
                           label: Container(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               alignment: Alignment.center,
                               child: const Text('Invitation'))),
                       GridColumn(

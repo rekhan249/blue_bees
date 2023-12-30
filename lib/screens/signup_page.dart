@@ -5,6 +5,7 @@ import 'package:blue_bees/widgets/cutome_elevated_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -92,6 +93,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       padding: EdgeInsets.symmetric(horizontal: 2.w),
                       child: IntlPhoneField(
                         focusNode: focusNode,
+                        pickerDialogStyle:
+                            PickerDialogStyle(backgroundColor: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Phone Number',
                           labelStyle: const TextStyle(color: Colors.black),

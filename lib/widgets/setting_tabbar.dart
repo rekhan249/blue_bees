@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,13 +15,14 @@ class SettingTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBar(
-      indicatorSize: TabBarIndicatorSize.tab,
+      dragStartBehavior: DragStartBehavior.start,
       labelColor: Colors.black,
       dividerColor: Colors.transparent,
       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
       automaticIndicatorColorAdjustment: true,
-      isScrollable: true,
+      labelPadding: EdgeInsets.only(left: 0.w),
       indicatorColor: Colors.transparent,
+      isScrollable: true,
       controller: _tabController,
       onTap: onTap,
       tabs: [
