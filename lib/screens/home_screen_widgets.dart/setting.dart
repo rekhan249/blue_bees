@@ -59,20 +59,21 @@ class _SettingState extends State<Setting> with SingleTickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                        child: TabBarView(
-                      viewportFraction: 0.98.w,
-                      controller: _tabController,
-                      children: const [
-                        GeneralSettings(),
-                        SecuritySettings(),
-                        SharedSetting(),
-                        PaymentSetting(),
-                        InterestSetting(),
-                        ManageSubscription(),
-                        AutomaticOffer(),
-                        AdvertisManage(),
-                      ],
-                    )),
+                      child: TabBarView(
+                        viewportFraction: 0.98.w,
+                        controller: _tabController,
+                        children: const [
+                          GeneralSettings(),
+                          SecuritySettings(),
+                          SharedSetting(),
+                          PaymentSetting(),
+                          InterestSetting(),
+                          ManageSubscription(),
+                          AutomaticOffer(),
+                          AdvertisManage(),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
           ],

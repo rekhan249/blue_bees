@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:blue_bees/table_view/detailcontailner.dart';
 import 'package:blue_bees/widgets/bottom_sheet_textform.dart';
 import 'package:blue_bees/widgets/card_offer_details.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +49,23 @@ class _RequestsState extends State<Requests> {
                           style: TextStyle(color: Colors.white))),
                 ),
               ),
+              const DetailsContainerEveryPage(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+                child: Text(
+                  "Requests",
+                  style:
+                      TextStyle(fontSize: 25.sp, fontWeight: FontWeight.normal),
+                ),
+              ),
+              SizedBox(height: 30.h),
               SizedBox(height: 20.h),
               const CardOfOfferDetails(),
+              SizedBox(height: 20.h),
               const CardOfOfferDetails(),
+              SizedBox(height: 20.h),
               const CardOfOfferDetails(),
+              SizedBox(height: 20.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                 child: ElevatedButton.icon(

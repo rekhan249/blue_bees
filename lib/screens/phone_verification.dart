@@ -89,12 +89,9 @@ class PhoneVerifactionScreen extends StatelessWidget {
                           color: Colors.black.withOpacity(0.5),
                           fontSize: 14.sp),
                     )),
-                SizedBox(
-                  height: 40.h,
-                  width: 120.w,
+                Container(
+                  decoration: const BoxDecoration(),
                   child: CutomElevatedButton(
-                    backGroundColor: const Color.fromARGB(255, 12, 82, 205),
-                    textColor: Colors.white,
                     buttonName: 'Enterence',
                     onPressed: () {
                       Navigator.push(
@@ -103,6 +100,7 @@ class PhoneVerifactionScreen extends StatelessWidget {
                               builder: (context) => const MyHomePage()));
                     },
                     borderColor: Colors.grey.shade300,
+                    textValue: 12.sp,
                   ),
                 ),
               ],

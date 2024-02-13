@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   FocusNode focusNode = FocusNode();
   bool isRememberMe = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: AlignmentDirectional.topStart,
                       child: Text(
                         'Phone Number',
-                        style: TextStyle(color: Colors.grey, fontSize: 16.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 16.sp),
                       ),
                     ),
                   ),
@@ -65,20 +66,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       pickerDialogStyle:
                           PickerDialogStyle(backgroundColor: Colors.white),
                       decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                        labelStyle: const TextStyle(color: Colors.black),
-                        enabled: true,
-                        disabledBorder: InputBorder.none,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey.shade900)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey.shade200)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey.shade50),
-                        ),
-                      ),
+                          hintText: 'Phone Number',
+                          hintStyle: const TextStyle(color: Colors.black),
+                          enabled: true,
+                          disabledBorder: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade900)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade900)),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 10.h)),
                       languageCode: "en",
                       onChanged: (phone) {
                         if (kDebugMode) {
@@ -92,7 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -106,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }),
                     ],
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 15.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -129,14 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 16.sp),
                           )),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SizedBox(
-                          height: 50.h,
-                          width: 100.w,
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.transparent,
+                          ),
                           child: CutomElevatedButton(
-                            backGroundColor:
-                                const Color.fromARGB(255, 12, 82, 205),
-                            textColor: Colors.white,
                             buttonName: 'Sign In',
                             onPressed: () {
                               Navigator.push(
@@ -145,7 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (context) =>
                                           const MyHomePage()));
                             },
-                            borderColor: Colors.grey.shade300,
+                            borderColor: Colors.transparent,
+                            textValue: 10.sp,
                           ),
                         ),
                       ),
@@ -158,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: FractionalOffset.centerRight,
                       child: Text(
                         'Or log in via',
-                        style: TextStyle(color: Colors.grey, fontSize: 16.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 16.sp),
                       ),
                     ),
                   ),
@@ -168,27 +165,55 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                size: 35.sp,
-                                FontAwesomeIcons.googlePlus,
-                                color: Colors.red,
-                              )),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                size: 35.sp,
-                                FontAwesomeIcons.twitter,
-                                color: Colors.blue,
-                              )),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                size: 35.sp,
-                                FontAwesomeIcons.facebook,
-                                color: const Color.fromARGB(255, 12, 82, 205),
-                              )),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 13.w, vertical: 8),
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(color: Colors.red.shade300)
+                                ],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.r))),
+                            child: Icon(
+                              size: 15.sp,
+                              FontAwesomeIcons.googlePlusG,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 5.w),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 13.w, vertical: 8),
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(color: Colors.blue.shade300)
+                                ],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.r))),
+                            child: Icon(
+                              size: 15.sp,
+                              FontAwesomeIcons.twitter,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 5.w),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 13.w, vertical: 8),
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color:
+                                          const Color.fromARGB(255, 12, 82, 205)
+                                              .withOpacity(0.8))
+                                ],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.r))),
+                            child: Icon(
+                                size: 15.sp,
+                                FontAwesomeIcons.facebookF,
+                                color: Colors.white),
+                          ),
                         ]),
                   ),
                 ],

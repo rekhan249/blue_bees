@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:blue_bees/table_view/detailcontailner.dart';
 import 'package:blue_bees/widgets/bottom_sheet_tech.dart';
 import 'package:blue_bees/widgets/tech_supp_closed.dart';
 import 'package:blue_bees/widgets/tech_supp_everyone.dart';
@@ -35,62 +36,60 @@ class _TechnicalSupportsState extends State<TechnicalSupports>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                SizedBox(height: 20.h),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Text(
-                    'Technical Support tickets',
-                    style: TextStyle(fontSize: 20.sp),
-                  ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const DetailsContainerEveryPage(),
+              SizedBox(height: 50.h),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Technical Support tickets',
+                  style: TextStyle(fontSize: 20.sp),
                 ),
-                SizedBox(
-                  height: 35.h,
-                  child: TabbarTechinical(tabController: _tabController),
+              ),
+              SizedBox(
+                height: 35.h,
+                child: TabbarTechinical(tabController: _tabController),
+              ),
+              Container(
+                  height: 270.h,
+                  decoration: const BoxDecoration(color: Colors.transparent),
+                  child:
+                      TabBarView(controller: _tabController, children: const [
+                    TechSuppClosed(),
+                    TechSuppResolving(),
+                    TechSuppSolved(),
+                    TechSuppEveryone(),
+                  ])),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10.w),
+                width: double.infinity.w,
+                decoration: const BoxDecoration(color: Colors.white),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: ElevatedButton.icon(
+                      style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              Color.fromARGB(255, 12, 82, 205))),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const TechnicalBottomSheetForm();
+                            });
+                      },
+                      icon: const Icon(Icons.add, color: Colors.white),
+                      label: const Text("Open a technical support ticket",
+                          style: TextStyle(color: Colors.white))),
                 ),
-                Container(
-                    height: 270.h,
-                    decoration: const BoxDecoration(color: Colors.transparent),
-                    child: Expanded(
-                      child: TabBarView(
-                          controller: _tabController,
-                          children: const [
-                            TechSuppClosed(),
-                            TechSuppResolving(),
-                            TechSuppSolved(),
-                            TechSuppEveryone(),
-                          ]),
-                    )),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10.w),
-                  width: double.infinity.w,
-                  decoration: const BoxDecoration(color: Colors.white),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w),
-                    child: ElevatedButton.icon(
-                        style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                                Color.fromARGB(255, 12, 82, 205))),
-                        onPressed: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const TechnicalBottomSheetForm();
-                              });
-                        },
-                        icon: const Icon(Icons.add, color: Colors.white),
-                        label: const Text("Open a technical support ticket",
-                            style: TextStyle(color: Colors.white))),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -113,55 +112,39 @@ class TabbarTechinical extends StatelessWidget {
       labelColor: Colors.black,
       automaticIndicatorColorAdjustment: true,
       dividerColor: Colors.transparent,
+      indicator: BoxDecoration(
+          color: const Color.fromARGB(255, 12, 82, 205),
+          borderRadius: BorderRadius.all(Radius.circular(20.r))),
       isScrollable: false,
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
       indicatorColor: Colors.transparent,
       controller: _tabController,
       labelPadding: const EdgeInsets.symmetric(vertical: 0),
       tabs: [
-        Card(
-          elevation: 2,
-          child: Container(
-              width: 60.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  color: Colors.white),
-              child: const Tab(
-                child: Text('Closed'),
-              )),
-        ),
-        Card(
-          elevation: 2,
-          child: Container(
-              width: 80.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  color: Colors.white),
-              child: const Tab(
-                child: Text('Resolving'),
-              )),
-        ),
-        Card(
-          elevation: 2,
-          child: Container(
-              width: 60.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  color: Colors.white),
-              child: const Tab(
-                child: Text('Solved'),
-              )),
-        ),
-        Card(
-          elevation: 2,
-          child: Container(
-              width: 75.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  color: Colors.white),
-              child: const Tab(
-                child: Expanded(child: Text('Everyone')),
-              )),
-        ),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 8.w),
+            decoration: const BoxDecoration(),
+            child: const Tab(
+              child: Text('Closed'),
+            )),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 8.w),
+            decoration: const BoxDecoration(),
+            child: const Tab(
+              child: Text('Resolving'),
+            )),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 8.w),
+            decoration: const BoxDecoration(),
+            child: const Tab(
+              child: Text('Solved'),
+            )),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 8.w),
+            decoration: const BoxDecoration(),
+            child: const Tab(
+              child: Expanded(child: Text('Everyone')),
+            )),
       ],
     );
   }

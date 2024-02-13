@@ -14,16 +14,14 @@ class _TheCarThreeTabsState extends State<TheCarThreeTabs> {
   DateFormat dateTimeFormat = DateFormat('yyyy-mm-dd');
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        decoration: const BoxDecoration(color: Colors.transparent),
-        child: Column(children: [
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               child:
                   CustomCard(dateTimeFormat: dateTimeFormat, onPressed: () {})),
-        ]),
-      ),
-    );
+        ]);
   }
 }

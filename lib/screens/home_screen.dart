@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
   final TextEditingController _searchController = TextEditingController();
+  bool isSetValue = false;
 
   @override
   void initState() {
@@ -76,11 +77,17 @@ class _MyHomePageState extends State<MyHomePage>
                                   children: [
                                     IconButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const HomeTabNotification()));
+                                          setState(() {
+                                            if (isSetValue = true) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const HomeTabNotification()));
+                                            } else {
+                                              isSetValue = false;
+                                            }
+                                          });
                                         },
                                         icon: const Icon(
                                           Icons.notifications_none_sharp,
@@ -144,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage>
               ],
             ),
             Positioned(
-              top: 200.h,
+              top: 205.h,
               child: SizedBox(
                   width: size.width,
                   child: HomeScreenTabBar(tabController: _tabController)),

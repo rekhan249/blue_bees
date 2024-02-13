@@ -14,12 +14,15 @@ class CustomSearchTextFormField extends StatelessWidget {
     return TextFormField(
       controller: _searchController,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+          contentPadding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 15.w),
           hintText: "Search here",
           suffixIcon: const Icon(Icons.search),
           fillColor: Colors.white,
           filled: true,
           enabled: true,
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25.r)),
+              borderSide: const BorderSide(color: Colors.black)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(25.r)),
               borderSide: const BorderSide(color: Colors.black)),

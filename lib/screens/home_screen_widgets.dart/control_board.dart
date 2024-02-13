@@ -1,3 +1,4 @@
+import 'package:blue_bees/table_view/detailcontailner.dart';
 import 'package:blue_bees/widgets/card_offer_details.dart';
 import 'package:blue_bees/widgets/cardwith_button.dart';
 import 'package:blue_bees/widgets/custom_tabThree.dart';
@@ -36,70 +37,94 @@ class _ControlBoardState extends State<ControlBoard>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(height: 30.h),
-              CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
-              CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
-              CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
-              SizedBox(height: 10.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-                child: Text(
-                  "Request that interest you",
-                  style: TextStyle(fontSize: 25.sp),
-                ),
-              ),
-              SizedBox(
-                  height: 40.h,
-                  child: ThreeTabBar(tabController: _tabController)),
-              Container(
-                  height: 450,
-                  decoration: const BoxDecoration(color: Colors.transparent),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: TabBarView(
-                            controller: _tabController,
-                            children: const [
-                              TheCarThreeTabs(),
-                              ThreeTabScreenFood(),
-                              ThreeTabScreenEveryOne(),
-                            ]),
-                      ),
-                    ],
-                  )),
-              Column(
+            child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  SizedBox(height: 20.h),
+                  const DetailsContainerEveryPage(),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                                Color.fromARGB(255, 12, 82, 205))),
-                        child: Text('More orders',
-                            style: TextStyle(
-                                fontSize: 16.sp, color: Colors.white))),
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+                    child: Text(
+                      "Offer sent",
+                      style: TextStyle(
+                          fontSize: 25.sp, fontWeight: FontWeight.normal),
+                    ),
                   ),
+                  SizedBox(height: 30.h),
+                  CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+                  SizedBox(height: 20.h),
+                  CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+                  SizedBox(height: 20.h),
+                  CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+                  SizedBox(height: 20.h),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                    child: Text('My ads', style: TextStyle(fontSize: 20.sp)),
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                    child: Text(
+                      "Request that interest you",
+                      style: TextStyle(
+                          fontSize: 20.sp, fontWeight: FontWeight.normal),
+                    ),
                   ),
-                  const CardOfOfferDetails(),
-                  const CardOfOfferDetails(),
-                  const CardOfOfferDetails(),
-                ],
-              )
-            ]),
-      )),
+                  Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+                      child: ThreeTabBar(tabController: _tabController)),
+                  Container(
+                      height: 450.h,
+                      decoration: BoxDecoration(color: Colors.grey.shade300),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: TabBarView(
+                                controller: _tabController,
+                                children: const [
+                                  TheCarThreeTabs(),
+                                  ThreeTabScreenFood(),
+                                  ThreeTabScreenEveryOne(),
+                                ]),
+                          ),
+                        ],
+                      )),
+                  Container(
+                    color: Colors.grey.shade300,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 5.h),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              style: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Color.fromARGB(255, 12, 82, 205))),
+                              child: Text('More orders',
+                                  style: TextStyle(
+                                      fontSize: 16.sp, color: Colors.white))),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 5.h),
+                          child:
+                              Text('My ads', style: TextStyle(fontSize: 20.sp)),
+                        ),
+                        SizedBox(height: 20.h),
+                        const CardOfOfferDetails(),
+                        SizedBox(height: 20.h),
+                        const CardOfOfferDetails(),
+                        SizedBox(height: 20.h),
+                        const CardOfOfferDetails(),
+                      ],
+                    ),
+                  )
+                ]),
+          )),
     );
   }
 }

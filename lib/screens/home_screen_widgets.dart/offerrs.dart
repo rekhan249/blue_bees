@@ -1,3 +1,4 @@
+import 'package:blue_bees/table_view/detailcontailner.dart';
 import 'package:blue_bees/widgets/bottom_sheet_textform.dart';
 import 'package:blue_bees/widgets/cardwith_button.dart';
 import 'package:flutter/material.dart';
@@ -17,18 +18,34 @@ class _OffersState extends State<Offers> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        padding: EdgeInsets.symmetric(horizontal: 5.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(height: 55.h),
+            const DetailsContainerEveryPage(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+              child: Text(
+                "Offers",
+                style:
+                    TextStyle(fontSize: 25.sp, fontWeight: FontWeight.normal),
+              ),
+            ),
+            SizedBox(height: 30.h),
             CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+            SizedBox(height: 20.h),
             CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+            SizedBox(height: 20.h),
             CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+            SizedBox(height: 20.h),
             CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+            SizedBox(height: 20.h),
             CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+            SizedBox(height: 20.h),
             CustomCardTakfulwihbutton(dateTimeFormat: dateTimeFormat),
+            SizedBox(height: 20.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: ElevatedButton.icon(

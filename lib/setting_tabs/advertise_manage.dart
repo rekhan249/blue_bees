@@ -15,9 +15,10 @@ class _AdvertisManageState extends State<AdvertisManage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -106,38 +107,28 @@ class _AdvertisManageState extends State<AdvertisManage> {
                     icon1: Icons.abc),
               ),
               Container(
-                margin: const EdgeInsets.all(6),
-                alignment: AlignmentDirectional.bottomEnd,
-                width: double.infinity.w,
-                decoration: const BoxDecoration(color: Colors.transparent),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: ElevatedButton(
-                      style: const ButtonStyle(
-                          side: MaterialStatePropertyAll(
-                              BorderSide(color: Colors.green)),
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.white)),
-                      onPressed: () {},
-                      child: const Text("Add Advertisement",
-                          style: TextStyle(color: Colors.green))),
+                margin: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green),
+                    borderRadius: BorderRadius.circular(20.r)),
+                child: const Text(
+                  'Add Advertisement',
+                  style: TextStyle(color: Colors.green),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.all(6),
+                margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
                 alignment: AlignmentDirectional.bottomEnd,
                 width: double.infinity.w,
                 decoration: const BoxDecoration(color: Colors.white),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 12, 82, 205))),
-                      onPressed: () {},
-                      child: const Text("Add another ad",
-                          style: TextStyle(color: Colors.white))),
-                ),
+                child: ElevatedButton(
+                    style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 12, 82, 205))),
+                    onPressed: () {},
+                    child: const Text("Add another ad",
+                        style: TextStyle(color: Colors.white))),
               ),
             ],
           ),

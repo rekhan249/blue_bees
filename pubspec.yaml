@@ -44,6 +44,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^24.1.41
   get: ^4.6.6
   intl_phone_number_input: ^0.7.4
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

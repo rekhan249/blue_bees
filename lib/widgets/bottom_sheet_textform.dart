@@ -22,15 +22,17 @@ class CustomTextFormBottomSheet extends StatelessWidget {
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 10.h),
         prefixIcon: Icon(icon1),
         suffixIcon: Icon(icon2),
         hintText: hintText,
+        hintStyle: TextStyle(color: Colors.grey, fontSize: 13.sp),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
+            borderRadius: BorderRadius.circular(2.r),
+            borderSide: const BorderSide(color: Colors.grey)),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
+            borderRadius: BorderRadius.circular(2.r),
+            borderSide: const BorderSide(color: Colors.grey)),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -61,13 +63,15 @@ class CustomTextFormSingleIcon extends StatelessWidget {
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 5.h),
           prefixIcon: Icon(icon1),
           hintText: hintText,
+          hintStyle: TextStyle(color: Colors.grey, fontSize: 13.sp),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5.r),
-              borderSide: BorderSide(color: Colors.grey, width: 2.5.w)),
+              borderRadius: BorderRadius.circular(2.r),
+              borderSide: BorderSide(color: Colors.grey, width: 1.w)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.5.w)),
+              borderSide: BorderSide(color: Colors.grey, width: 1.w)),
           border: const UnderlineInputBorder(borderSide: BorderSide.none)),
       validator: (value) {
         if (value == null || value.isEmpty) {

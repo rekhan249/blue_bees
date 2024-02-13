@@ -24,6 +24,7 @@ class _SharedSettingState extends State<SharedSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -36,7 +37,7 @@ class _SharedSettingState extends State<SharedSetting> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 50,
+                      height: 45.h,
                       child: ElevatedButton(
                           style: const ButtonStyle(
                               shape: MaterialStatePropertyAll(LinearBorder()),
@@ -52,11 +53,13 @@ class _SharedSettingState extends State<SharedSetting> {
                     Expanded(
                       child: TextFormField(
                         controller: _firstcontrollers4,
-                        decoration: const InputDecoration(
-                            border: UnderlineInputBorder(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 5.h),
+                            border: const UnderlineInputBorder(
                                 borderSide: BorderSide.none),
-                            hintText:
-                                'Type the particular email to invite him'),
+                            hintText: 'Type the particular email to invite him',
+                            hintStyle:
+                                TextStyle(color: Colors.grey, fontSize: 13.sp)),
                       ),
                     ),
                   ],

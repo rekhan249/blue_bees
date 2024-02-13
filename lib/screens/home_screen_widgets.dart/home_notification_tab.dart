@@ -172,12 +172,12 @@ class _HomeTabNotificationState extends State<HomeTabNotification>
                   )),
             ],
           ),
-          Positioned(
-            top: 365.h,
-            child: SizedBox(
-                width: size.width,
-                child: HomeScreenTabBar(tabController: _tabController)),
-          ),
+          // Positioned(
+          //   top: 365.h,
+          //   child: SizedBox(
+          //       width: size.width,
+          //       child: HomeScreenTabBar(tabController: _tabController)),
+          // ),
         ],
       ),
     );

@@ -10,6 +10,8 @@ class ManageSubscription extends StatefulWidget {
 class _ManageSubscriptionState extends State<ManageSubscription> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold(
+      backgroundColor: Colors.white,
+    );
   }
 }

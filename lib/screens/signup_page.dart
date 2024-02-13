@@ -21,6 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   bool isServiceRequest = false;
   bool isServiceProvider = true;
+
   FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,11 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 20.h),
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: Text(
                         'Register a new membership',
                         style: TextStyle(
@@ -49,12 +48,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontSize: 18.sp),
                       ),
                     ),
-                    SizedBox(height: 20.h),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: Text(
                         'User Name',
-                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
                     TextFormField(
@@ -63,12 +61,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         hintText: 'Type your name here',
+                        hintStyle: const TextStyle(color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: BorderRadius.circular(2.r),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: BorderRadius.circular(2.r),
                         ),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 10.w),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -82,11 +83,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     SizedBox(height: 20.h),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: Text(
                         'Phone Number',
-                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
                     Padding(
@@ -96,20 +96,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         pickerDialogStyle:
                             PickerDialogStyle(backgroundColor: Colors.white),
                         decoration: InputDecoration(
-                          labelText: 'Phone Number',
-                          labelStyle: const TextStyle(color: Colors.black),
+                          hintText: 'Phone Number',
+                          hintStyle: const TextStyle(color: Colors.grey),
                           enabled: true,
                           focusedBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey.shade900)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10.r)),
+                                  BorderRadius.all(Radius.circular(2.r)),
                               borderSide:
-                                  BorderSide(color: Colors.grey.shade200)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey.shade50),
-                          ),
+                                  BorderSide(color: Colors.grey.shade900)),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 10.w),
                         ),
                         languageCode: "en",
                         onChanged: (phone) {
@@ -125,10 +124,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      padding: EdgeInsets.symmetric(vertical: 5.w),
                       child: Text(
                         'Email',
-                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
                     TextFormField(
@@ -137,12 +136,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         hintText: 'Type your email here',
+                        hintStyle: const TextStyle(color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: BorderRadius.circular(2.r),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: BorderRadius.circular(2.r),
                         ),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 10.w),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -157,10 +159,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     SizedBox(height: 20.h),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      padding: EdgeInsets.symmetric(vertical: 5.w),
                       child: Text(
                         'Password',
-                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
                     TextFormField(
@@ -169,20 +171,23 @@ class _SignUpPageState extends State<SignUpPage> {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: 'Type your Password here',
+                          hintStyle: const TextStyle(color: Colors.grey),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
+                            borderRadius: BorderRadius.circular(2.r),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
+                            borderRadius: BorderRadius.circular(2.r),
                           ),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 10.w),
                         ),
                         validator: null),
                     SizedBox(height: 20.h),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      padding: EdgeInsets.symmetric(vertical: 5.w),
                       child: Text(
                         'Confirm Password',
-                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
                     TextFormField(
@@ -191,17 +196,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: 'Type your confirm password here',
+                          hintStyle: const TextStyle(color: Colors.grey),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
+                            borderRadius: BorderRadius.circular(2.r),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
+                            borderRadius: BorderRadius.circular(2.r),
                           ),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 10.w),
                         ),
                         validator: null),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Expanded(
                           child: Row(
@@ -245,7 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -267,14 +276,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                   fontSize: 16.sp),
                             )),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
-                            height: 50.h,
-                            width: 200.w,
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Container(
+                            decoration: const BoxDecoration(),
                             child: CutomElevatedButton(
-                              backGroundColor:
-                                  const Color.fromARGB(255, 12, 82, 205),
-                              textColor: Colors.white,
                               buttonName: 'Register a new account',
                               onPressed: () {
                                 Navigator.push(
@@ -283,20 +288,22 @@ class _SignUpPageState extends State<SignUpPage> {
                                         builder: (context) =>
                                             const PhoneVerifactionScreen()));
                               },
-                              borderColor: Colors.grey.shade300,
+                              borderColor: Colors.transparent,
+                              textValue: 12,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 15.h),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Align(
                         alignment: FractionalOffset.centerRight,
                         child: Text(
                           'Or log in via',
-                          style: TextStyle(color: Colors.grey, fontSize: 16.sp),
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 16.sp),
                         ),
                       ),
                     ),
@@ -306,27 +313,55 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  size: 35.sp,
-                                  FontAwesomeIcons.googlePlus,
-                                  color: Colors.red,
-                                )),
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  size: 35.sp,
-                                  FontAwesomeIcons.twitter,
-                                  color: Colors.blue,
-                                )),
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  size: 35.sp,
-                                  FontAwesomeIcons.facebook,
-                                  color: const Color.fromARGB(255, 12, 82, 205),
-                                )),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 13.w, vertical: 8),
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(color: Colors.red.shade300)
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.r))),
+                              child: Icon(
+                                size: 15.sp,
+                                FontAwesomeIcons.googlePlusG,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 13.w, vertical: 8),
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(color: Colors.blue.shade300)
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.r))),
+                              child: Icon(
+                                size: 15.sp,
+                                FontAwesomeIcons.twitter,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 13.w, vertical: 8),
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color.fromARGB(
+                                                255, 12, 82, 205)
+                                            .withOpacity(0.8))
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.r))),
+                              child: Icon(
+                                  size: 15.sp,
+                                  FontAwesomeIcons.facebookF,
+                                  color: Colors.white),
+                            ),
                           ]),
                     ),
                     SizedBox(height: 20.h),
