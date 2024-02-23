@@ -1,12 +1,12 @@
 import 'package:awesome_icons/awesome_icons.dart';
+import 'package:blue_bees/screens/getx_controller/auth_controller/signup_control.dart';
+import 'package:blue_bees/screens/getx_controller/check_boxes/check_box_control.dart';
 import 'package:blue_bees/screens/login_screen.dart';
-import 'package:blue_bees/screens/phone_verification.dart';
 import 'package:blue_bees/widgets/cutome_elevated_button.dart';
-import 'package:flutter/foundation.dart';
+import 'package:blue_bees/widgets/formfield_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:get/get.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -18,11 +18,32 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  bool isServiceRequest = false;
-  bool isServiceProvider = true;
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController =
+      TextEditingController();
 
+  final SignUpConroller signUpConroller = Get.put(SignUpConroller());
+  final SelectonOnlyOfCheckBoxes selectonOnlyOfCheckBoxes =
+      Get.put(SelectonOnlyOfCheckBoxes());
   FocusNode focusNode = FocusNode();
+  void _submittionDataOfSigUP(BuildContext context) {
+    bool isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState!.save();
+    signUpConroller.formSubmittionForSignUp(
+        context,
+        _nameController.text,
+        _phoneController.text,
+        _emailController.text,
+        _passwordController.text,
+        _passwordConfirmController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,32 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
-                    TextFormField(
-                      controller: _nameController,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        hintText: 'Type your name here',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(2.r),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(2.r),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 10.w),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your name';
-                        } else if (!RegExp(r"^[a-zA-Z]+(?:\s[a-zA-Z]+)+$")
-                            .hasMatch(value)) {
-                          return 'Please enter valid name';
-                        }
-                        return null;
-                      },
-                    ),
+                    NameFormField(nameController: _nameController),
                     SizedBox(height: 20.h),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.h),
@@ -91,37 +87,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2.w),
-                      child: IntlPhoneField(
-                        focusNode: focusNode,
-                        pickerDialogStyle:
-                            PickerDialogStyle(backgroundColor: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: 'Phone Number',
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          enabled: true,
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade900)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2.r)),
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade900)),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.h, horizontal: 10.w),
-                        ),
-                        languageCode: "en",
-                        onChanged: (phone) {
-                          if (kDebugMode) {
-                            print(phone.completeNumber);
-                          }
-                        },
-                        onCountryChanged: (country) {
-                          if (kDebugMode) {
-                            print('Country changed to: ${country.name}');
-                          }
-                        },
-                      ),
+                      child: PhoneTextField(
+                          phoneController: _phoneController,
+                          focusNode: focusNode),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.w),
@@ -130,33 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        hintText: 'Type your email here',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(2.r),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(2.r),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 10.w),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        } else if (!RegExp(
-                                r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-                            .hasMatch(value)) {
-                          return 'Please enter valid email';
-                        }
-                        return null;
-                      },
-                    ),
+                    EmailTextfield(emailController: _emailController),
                     SizedBox(height: 20.h),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.w),
@@ -165,23 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
-                    TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          hintText: 'Type your Password here',
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(2.r),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(2.r),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.h, horizontal: 10.w),
-                        ),
-                        validator: null),
+                    PasswordTextField(passwordController: _passwordController),
                     SizedBox(height: 20.h),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.w),
@@ -190,69 +116,35 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(color: Colors.black, fontSize: 15.sp),
                       ),
                     ),
-                    TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          hintText: 'Type your confirm password here',
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(2.r),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(2.r),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.h, horizontal: 10.w),
-                        ),
-                        validator: null),
+                    PasswordConfirmTextField(
+                        passwordConfirmController: _passwordConfirmController),
                     SizedBox(height: 10.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text('Service requester',
-                                  style: TextStyle(
-                                      fontSize: 13.sp,
-                                      color: const Color.fromARGB(
-                                          255, 12, 82, 205))),
-                              Checkbox(
-                                  shape: const CircleBorder(),
-                                  activeColor:
-                                      const Color.fromARGB(255, 12, 82, 205),
-                                  value: isServiceRequest,
-                                  onChanged: (value) {
-                                    isServiceRequest = value!;
-                                    setState(() {});
-                                  }),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text('Service requester',
-                                  style: TextStyle(
-                                      fontSize: 13.sp,
-                                      color: const Color.fromARGB(
-                                          255, 12, 82, 205))),
-                              Checkbox(
-                                  shape: const CircleBorder(),
-                                  activeColor:
-                                      const Color.fromARGB(255, 12, 82, 205),
-                                  value: isServiceProvider,
-                                  onChanged: (value) {
-                                    isServiceProvider = value!;
-                                    setState(() {});
-                                  }),
-                            ],
-                          ),
-                        ),
-                      ],
+                    GetBuilder<SelectonOnlyOfCheckBoxes>(
+                      builder: (controller) => Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: List.generate(
+                            controller.checkBoxesMainList.length,
+                            (index) => Expanded(
+                                  child: CheckboxListTile(
+                                      activeColor: const Color.fromARGB(
+                                          255, 12, 82, 205),
+                                      title: Text(
+                                          controller
+                                              .checkBoxesMainList[index].title,
+                                          style: TextStyle(
+                                              fontSize: 13.sp,
+                                              color: const Color.fromARGB(
+                                                  255, 12, 82, 205))),
+                                      value: controller
+                                          .checkBoxesMainList[index].value,
+                                      onChanged: (value) {
+                                        controller
+                                            .particularSelectionofCheckboxes(
+                                                value, index);
+                                      }),
+                                )),
+                      ),
                     ),
                     SizedBox(height: 10.h),
                     Row(
@@ -282,11 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             child: CutomElevatedButton(
                               buttonName: 'Register a new account',
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PhoneVerifactionScreen()));
+                                _submittionDataOfSigUP(context);
                               },
                               borderColor: Colors.transparent,
                               textValue: 12,

@@ -1,6 +1,4 @@
-import 'package:blue_bees/widgets/tech_supp_closed.dart';
-import 'package:blue_bees/widgets/tech_supp_resolved.dart';
-import 'package:blue_bees/widgets/tech_supp_solve.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';

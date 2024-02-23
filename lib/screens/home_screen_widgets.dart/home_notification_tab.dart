@@ -5,7 +5,6 @@ import 'package:blue_bees/screens/home_screen_widgets.dart/requests.dart';
 import 'package:blue_bees/screens/home_screen_widgets.dart/setting.dart';
 import 'package:blue_bees/screens/home_screen_widgets.dart/technical_supports.dart';
 import 'package:blue_bees/widgets/custom_search.dart';
-import 'package:blue_bees/widgets/home_screen_tabbar.dart';
 import 'package:blue_bees/widgets/notfy_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
