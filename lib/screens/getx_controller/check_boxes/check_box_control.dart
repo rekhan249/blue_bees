@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 
 class SelectonOnlyOfCheckBoxes extends GetxController {
-  CheckBoxesMain? _checkBoxesMain;
   final RxList<CheckBoxesMain> _checkBoxesMainList = [
     CheckBoxesMain(id: 0, value: false, title: "Service provider"),
     CheckBoxesMain(id: 1, value: false, title: "Service requester")
   ].obs;
-  CheckBoxesMain? get checkBoxesMain => _checkBoxesMain;
+
   RxList<CheckBoxesMain> get checkBoxesMainList => _checkBoxesMainList;
 
   void particularSelectionofCheckboxes(bool? value, int index) {

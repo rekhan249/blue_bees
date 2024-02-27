@@ -41,7 +41,19 @@ class _SignUpPageState extends State<SignUpPage> {
         _phoneController.text,
         _emailController.text,
         _passwordController.text,
-        _passwordConfirmController.text);
+        _passwordConfirmController.text,
+        selectonOnlyOfCheckBoxes.checkBoxesMainList);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
+    
+    super.dispose();
   }
 
   @override
@@ -173,9 +185,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             decoration: const BoxDecoration(),
                             child: CutomElevatedButton(
                               buttonName: 'Register a new account',
-                              onPressed: () {
-                                _submittionDataOfSigUP(context);
-                              },
+                              onPressed: () => _submittionDataOfSigUP(context),
                               borderColor: Colors.transparent,
                               textValue: 12,
                             ),

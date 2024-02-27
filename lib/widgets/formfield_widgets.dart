@@ -152,7 +152,6 @@ class PhoneTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
-      controller: _phoneController,
       focusNode: focusNode,
       pickerDialogStyle: PickerDialogStyle(backgroundColor: Colors.white),
       decoration: InputDecoration(
@@ -168,8 +167,9 @@ class PhoneTextField extends StatelessWidget {
       ),
       languageCode: "en",
       onChanged: (phone) {
+        _phoneController.text = phone.completeNumber;
         if (kDebugMode) {
-          print(phone.completeNumber);
+          print("object ${_phoneController.text}");
         }
       },
       onCountryChanged: (country) {

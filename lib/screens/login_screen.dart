@@ -1,10 +1,11 @@
 import 'package:awesome_icons/awesome_icons.dart';
-import 'package:blue_bees/screens/home_screen.dart';
+import 'package:blue_bees/screens/getx_controller/auth_controller/signin_controll.dart';
 import 'package:blue_bees/screens/signup_page.dart';
 import 'package:blue_bees/widgets/cutome_elevated_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -17,9 +18,27 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final TextEditingController _phoneNumberControl = TextEditingController();
+
+  final SignInController signInConroller = Get.put(SignInController());
+  final IsRemembered isRemember = Get.put(IsRemembered());
 
   FocusNode focusNode = FocusNode();
-  bool isRememberMe = false;
+  void _submittionDataOfSigUP(BuildContext context) {
+    bool isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState!.save();
+    signInConroller.formSubmittionForSignIn(context, _phoneNumberControl.text);
+  }
+
+  @override
+  void dispose() {
+    _phoneNumberControl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               horizontal: 10.w, vertical: 10.h)),
                       languageCode: "en",
                       onChanged: (phone) {
+                        _phoneNumberControl.text = phone.completeNumber;
                         if (kDebugMode) {
                           print(phone.completeNumber);
                         }
@@ -95,13 +115,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const Text("Remember me"),
-                      Checkbox(
-                          activeColor: const Color.fromARGB(255, 12, 82, 205),
-                          value: isRememberMe,
-                          onChanged: (value) {
-                            isRememberMe = value!;
-                            setState(() {});
-                          }),
+                      Obx(
+                        () => Checkbox(
+                            activeColor: const Color.fromARGB(255, 12, 82, 205),
+                            value: isRemember.isRemembered.value,
+                            onChanged: (value) {
+                              isRemember.rememberMe(value);
+                            }),
+                      ),
                     ],
                   ),
                   SizedBox(height: 15.h),
@@ -134,13 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: CutomElevatedButton(
                             buttonName: 'Sign In',
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MyHomePage()));
-                            },
+                            onPressed: () => _submittionDataOfSigUP(context),
                             borderColor: Colors.transparent,
                             textValue: 10.sp,
                           ),
