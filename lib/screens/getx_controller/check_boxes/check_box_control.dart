@@ -19,7 +19,7 @@ class SelectonOnlyOfCheckBoxes extends GetxController {
 }
 
 class CheckBoxesMain {
-  final int id;
+  final int id;  
   bool? value;
   final String title;
 
@@ -41,3 +41,58 @@ class CheckBoxesMain {
     );
   }
 }
+
+/*  
+
+import 'package:get/get.dart';
+
+class SelectonOnlyOfCheckBoxes extends GetxController {
+  final RxList<CheckBoxesMain> _checkBoxesMainList = [
+    CheckBoxesMain(
+        id: 0, value: false, "Service provider", backendTitle: 'compeny'),
+    CheckBoxesMain(
+        id: 1, value: false, "Service requester", backendTitle: 'client')
+  ].obs;
+
+  RxList<CheckBoxesMain> get checkBoxesMainList => _checkBoxesMainList;
+
+  void particularSelectionofCheckboxes(bool? value, int index) {
+    for (var element in _checkBoxesMainList) {
+      element.value = false;
+    }
+    _checkBoxesMainList[index].value = value!;
+
+    update();
+  }
+}
+
+class CheckBoxesMain {
+  final int id;
+  bool value;
+  String? title;
+  final String backendTitle;
+
+  CheckBoxesMain(this.title,
+      {required this.id, required this.value, required this.backendTitle});
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'value': value,
+      'title': title,
+      'backendTitle': backendTitle,
+    };
+  }
+
+  factory CheckBoxesMain.fromMap(Map<String, dynamic> map) {
+    return CheckBoxesMain(
+      map['title'] != null ? map['title'] as String : null,
+      id: map['id'],
+      value: map['value'],
+      backendTitle: map['backendTitle'],
+    );
+  }
+}
+
+
+  */

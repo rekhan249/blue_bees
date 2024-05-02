@@ -1,8 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 class PasswordConfirmTextField extends StatelessWidget {
   const PasswordConfirmTextField({
@@ -134,48 +131,6 @@ class NameFormField extends StatelessWidget {
           return 'Please enter valid name';
         }
         return null;
-      },
-    );
-  }
-}
-
-class PhoneTextField extends StatelessWidget {
-  const PhoneTextField({
-    super.key,
-    required TextEditingController phoneController,
-    required this.focusNode,
-  }) : _phoneController = phoneController;
-
-  final TextEditingController _phoneController;
-  final FocusNode focusNode;
-
-  @override
-  Widget build(BuildContext context) {
-    return IntlPhoneField(
-      focusNode: focusNode,
-      pickerDialogStyle: PickerDialogStyle(backgroundColor: Colors.white),
-      decoration: InputDecoration(
-        hintText: 'Phone Number',
-        hintStyle: const TextStyle(color: Colors.grey),
-        enabled: true,
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade900)),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(2.r)),
-            borderSide: BorderSide(color: Colors.grey.shade900)),
-        contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-      ),
-      languageCode: "en",
-      onChanged: (phone) {
-        _phoneController.text = phone.completeNumber;
-        if (kDebugMode) {
-          print("object ${_phoneController.text}");
-        }
-      },
-      onCountryChanged: (country) {
-        if (kDebugMode) {
-          print('Country changed to: ${country.name}');
-        }
       },
     );
   }

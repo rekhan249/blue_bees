@@ -1,138 +1,200 @@
+import 'package:blue_bees/models/blog_modells/get_single.dart';
+import 'package:blue_bees/models/blog_modells/getall_blogs.dart';
+import 'package:blue_bees/screens/getx_controller/blog_controller/get_all_blogs.dart';
 import 'package:blue_bees/widgets/bottom_sheet_textform.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 
 class SingleBlog extends StatefulWidget {
-  const SingleBlog({super.key});
+  final String? blogId;
+  final AllBlog singleBlog;
+  const SingleBlog({super.key, this.blogId, required this.singleBlog});
 
   @override
   State<SingleBlog> createState() => _SingleBlogState();
 }
 
 class _SingleBlogState extends State<SingleBlog> {
+  GetSingleBlogById getSingleBlogById = GetSingleBlogById();
+  List<ResponseDataValue>? allBlogDataList = [];
+  @override
+  void initState() {
+    getSingleBlogData();
+    super.initState();
+  }
+
+  getSingleBlogData() async {
+    allBlogDataList = await getSingleBlogById.getSingleBlog(widget.blogId);
+  }
+
   @override
   Widget build(BuildContext context) {
+    String removeHtmlTags(String htmlString) {
+      var document = parse(htmlString);
+      String parsedString = parse(document.body!.text).documentElement!.text;
+      return parsedString;
+    }
+
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-              height: size.height,
-              width: size.width,
-              decoration: const BoxDecoration(),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Column(children: [
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.w),
-                            child: Text('Hey Hi I am a Tester',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25.sp)),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 05.h),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                    '${DateFormat('M/d/y').parseUTC('12/16/2023')}',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 16.sp)),
-                                SizedBox(width: 10.w),
-                                Text('I am a Tester',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 16.sp)),
-                              ]),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(20.r)),
-                          child: Image.asset(
-                            'assets/images/arabic.jpg',
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                      ]),
-                      SizedBox(height: 05.h),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text('Hey Hi I am a Tester',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 25.sp)),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.w, vertical: 05.h),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                    "Occasionally.Hey Hi I am a Tester Hey Hi I am You can also check for any open issues on the Flutter GitHub repository.If the issue persists, you might need to share relevant portions of your code (especially where the RenderSliverPadding is used) so that more specific assistance can be provided. Additionally, checking the Flutter GitHub repository or forums for similar issues and solutions can be helpful. Occasionally, issues like this may be related to the Flutter framework itself. Ensure that you are using a stable version of Flutter and Dart. You can also check for any open",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 16.sp)),
+        child: Container(
+            height: size.height,
+            width: size.width,
+            decoration: const BoxDecoration(),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    FutureBuilder(
+                      future: getSingleBlogById.getSingleBlog(widget.blogId),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return const Center(
+                              child: Text("There is not data yet"));
+                        }
+                        var snapshotData = snapshot.data;
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshotData!.length,
+                          itemBuilder: (context, index) {
+                            var snapData = snapshotData[index];
+                            return Column(children: [
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
+                                  child: Text(snapData.title!.en.toString(),
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 25.sp)),
+                                ),
                               ),
-                            ]),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text('Hey Hi I am a Tester',
-                              style: TextStyle(fontSize: 15.sp)),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text('Hey Hi I am a Tester',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 25.sp)),
-                        ),
-                      ),
-                      TextFormField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.message),
-                            suffixIcon: const Icon(Icons.comment),
-                            hintText: "Comeents here",
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Field cannot be empty';
-                            }
-                            return null;
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8.w, vertical: 05.h),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                          DateFormat.yMMMMd('en_US').format(
+                                              DateTime.parse(snapData.createdAt!
+                                                  .toString())),
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16.sp)),
+                                      SizedBox(width: 10.w),
+                                      Text(
+                                          snapData.interests
+                                              .map((e) =>
+                                                  e.interestId!.title!.en)
+                                              .toString(),
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16.sp)),
+                                    ]),
+                              ),
+                              ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.r)),
+                                child: Image.network(
+                                  snapData.image.toString(),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                              SizedBox(height: 05.h),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
+                                  child: Text(snapData.title!.ar.toString(),
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 25.sp)),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8.w, vertical: 05.h),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                            removeHtmlTags(snapData.content!.en
+                                                .toString()),
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 16.sp)),
+                                      ),
+                                    ]),
+                              ),
+                              // Align(
+                              //   alignment: Alignment.bottomRight,
+                              //   child: Padding(
+                              //     padding:
+                              //         EdgeInsets.symmetric(horizontal: 8.w),
+                              //     child: Text('Hey Hi I am a Tester',
+                              //         style: TextStyle(fontSize: 15.sp)),
+                              //   ),
+                              // ),
+                              // Align(
+                              //   alignment: Alignment.bottomRight,
+                              //   child: Padding(
+                              //     padding:
+                              //         EdgeInsets.symmetric(horizontal: 8.w),
+                              //     child: Text('Hey Hi I am a Tester',
+                              //         style: TextStyle(
+                              //             color: Colors.black,
+                              //             fontSize: 25.sp)),
+                              //   ),
+                              // ),
+                            ]);
                           },
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return const MyBottomSheetForm();
-                                });
-                          })
-                    ],
-                  ),
+                        );
+                      },
+                    ),
+                    TextFormField(
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.message),
+                          suffixIcon: const Icon(Icons.comment),
+                          hintText: "Comments here",
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Field cannot be empty';
+                          }
+                          return null;
+                        },
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const MyBottomSheetForm();
+                              });
+                        }),
+                  ],
                 ),
-              )),
-        ),
+              ),
+            )),
       ),
     );
   }

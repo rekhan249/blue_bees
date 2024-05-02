@@ -4,9 +4,12 @@ import 'package:blue_bees/screens/getx_controller/check_boxes/check_box_control.
 import 'package:blue_bees/screens/login_screen.dart';
 import 'package:blue_bees/widgets/cutome_elevated_button.dart';
 import 'package:blue_bees/widgets/formfield_widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -19,6 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
@@ -28,6 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final SelectonOnlyOfCheckBoxes selectonOnlyOfCheckBoxes =
       Get.put(SelectonOnlyOfCheckBoxes());
   FocusNode focusNode = FocusNode();
+
   void _submittionDataOfSigUP(BuildContext context) {
     bool isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
@@ -37,12 +42,13 @@ class _SignUpPageState extends State<SignUpPage> {
     _formKey.currentState!.save();
     signUpConroller.formSubmittionForSignUp(
         context,
-        _nameController.text,
+        _nameController.text.trim(),
         _phoneController.text,
-        _emailController.text,
+        _emailController.text.trim(),
         _passwordController.text,
         _passwordConfirmController.text,
-        selectonOnlyOfCheckBoxes.checkBoxesMainList);
+        selectonOnlyOfCheckBoxes.checkBoxesMainList,
+        _countryController.text);
   }
 
   @override
@@ -52,7 +58,8 @@ class _SignUpPageState extends State<SignUpPage> {
     _emailController.dispose();
     _passwordController.dispose();
     _passwordConfirmController.dispose();
-    
+    _countryController.dispose();
+
     super.dispose();
   }
 
@@ -99,9 +106,43 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2.w),
-                      child: PhoneTextField(
-                          phoneController: _phoneController,
-                          focusNode: focusNode),
+                      child: IntlPhoneField(
+                        initialCountryCode: "PK",
+                        focusNode: focusNode,
+                        pickerDialogStyle:
+                            PickerDialogStyle(backgroundColor: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Phone Number',
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          enabled: true,
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade900)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(2.r)),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade900)),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 10.w),
+                        ),
+                        languageCode: "en",
+                        onChanged: (phone) {
+                          _countryController.text = phone.countryCode;
+                          _phoneController.text = phone.number;
+
+                          if (kDebugMode) {
+                            print(
+                                "Compelete number ${_countryController.text}${_phoneController.text}");
+                          }
+                        },
+                        onCountryChanged: (country) {
+                          if (kDebugMode) {
+                            print(
+                                'Country changed to: ${country.fullCountryCode}');
+                          }
+                        },
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.w),

@@ -1,4 +1,9 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "yaml.schemas": {
+    "https://gitlab.com/appsemble/appsemble/-/raw/HEAD/packages/cli/assets/appsemblerc.schema.json": "output:extension-output-Dart-Code.dart-code-%231-flutter%20doctor",
+    "https://json.schemastore.org/sourcehut-build-0.65.0.json": "file:///e%3A/F.Study%20Related/blue_bees/pubspec.yaml"
+  },
+  "cmake.sourceDirectory": "E:/F.Study Related/blue_bees/linux"
 }

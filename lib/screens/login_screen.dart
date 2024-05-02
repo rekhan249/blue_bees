@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -18,26 +19,43 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final TextEditingController _countryCodeControl = TextEditingController();
   final TextEditingController _phoneNumberControl = TextEditingController();
 
   final SignInController signInConroller = Get.put(SignInController());
   final IsRemembered isRemember = Get.put(IsRemembered());
+  final localStorage = GetStorage();
 
   FocusNode focusNode = FocusNode();
-  void _submittionDataOfSigUP(BuildContext context) {
+  void _submittionDataOfSigIn(BuildContext context) {
     bool isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (!isValid) {
       return;
     }
     _formKey.currentState!.save();
-    signInConroller.formSubmittionForSignIn(context, _phoneNumberControl.text);
+    signInConroller.formSubmittionForSignIn(
+        context, _phoneNumberControl.text, _countryCodeControl.text);
   }
 
   @override
   void dispose() {
     _phoneNumberControl.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (isRemember.isRemembered.value) {
+      print("++++++++++++++++++++++++++true");
+
+      _countryCodeControl.text = localStorage.read("country_code") ?? '';
+      _phoneNumberControl.text = localStorage.read("phone_number") ?? '';
+
+      print(
+          "SignInScreen ===========> ${_countryCodeControl.text}${_phoneNumberControl.text}");
+    }
   }
 
   @override
@@ -81,6 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: IntlPhoneField(
+                      controller: _phoneNumberControl,
+                      initialValue: _countryCodeControl.text,
                       focusNode: focusNode,
                       pickerDialogStyle:
                           PickerDialogStyle(backgroundColor: Colors.white),
@@ -99,14 +119,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               horizontal: 10.w, vertical: 10.h)),
                       languageCode: "en",
                       onChanged: (phone) {
-                        _phoneNumberControl.text = phone.completeNumber;
                         if (kDebugMode) {
                           print(phone.completeNumber);
                         }
                       },
                       onCountryChanged: (country) {
                         if (kDebugMode) {
-                          print('Country changed to: ${country.name}');
+                          print(
+                              'Country changed to: ${_phoneNumberControl.text}');
                         }
                       },
                     ),
@@ -155,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: CutomElevatedButton(
                             buttonName: 'Sign In',
-                            onPressed: () => _submittionDataOfSigUP(context),
+                            onPressed: () => _submittionDataOfSigIn(context),
                             borderColor: Colors.transparent,
                             textValue: 10.sp,
                           ),

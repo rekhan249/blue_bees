@@ -1,9 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class DateTimeProvider with ChangeNotifier {
+class DateTimeProvider extends GetxController {
   DateTime selectedDate = DateTime.now();
   DateFormat dateFormat = DateFormat("yyyy-mm-dd");
   final firstDate = DateTime(1980);
@@ -18,6 +19,6 @@ class DateTimeProvider with ChangeNotifier {
       selectedDate = timeDate;
       return selectedDate.toString();
     }
-    notifyListeners();
+    update();
   }
 }
